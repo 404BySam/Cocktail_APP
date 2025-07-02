@@ -1,16 +1,25 @@
-import { View, Text } from "react-native";
-import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
 import HomePage from "./HomePage";
-import CocktailsList from "./CocktailsList";
+import DetailCocktail from "./DetailCocktail";
+import CocktailTabs from "./CocktailTabs";
 
 const Stack = createNativeStackNavigator();
 
 export default function RootStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomePage} />
-      <Stack.Screen name="List" component={CocktailsList} />
+      <Stack.Screen
+        name="Home"
+        component={HomePage}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Cocktails"
+        component={CocktailTabs}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="Detail" component={DetailCocktail} />
     </Stack.Navigator>
   );
 }
