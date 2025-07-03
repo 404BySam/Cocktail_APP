@@ -52,7 +52,7 @@ export default function HomePage({ navigation }) {
           </Text>
         </View>
         <AnimatedTouchable
-          style={[styles.btn, scaleStyles]} // appliquer l'animation au bouton (container)
+          style={[styles.btn, scaleStyles]}
           onPress={() => navigation.navigate("Cocktails")}
         >
           <Text style={styles.textBTN}>C'est Parti !</Text>
