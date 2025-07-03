@@ -19,7 +19,11 @@ export default function RootStack() {
         component={CocktailTabs}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Detail" component={DetailCocktail} />
+      <Stack.Screen
+        name="Detail"
+        component={DetailCocktail}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }

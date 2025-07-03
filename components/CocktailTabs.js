@@ -15,8 +15,25 @@ const Tab = createBottomTabNavigator();
 
 export default function CocktailTabs() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Listes" component={CocktaiList} />
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: {
+          backgroundColor: "#ffe082",
+        },
+        tabBarActiveTintColor: "white",
+        tabBarLabelStyle: {
+          fontFamily: "Lobster-Regular",
+          fontSize: 20,
+        },
+      }}
+    >
+      <Tab.Screen
+        name="Listes"
+        component={CocktaiList}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Tab.Screen name="Favoris" component={Favoris} />
     </Tab.Navigator>
   );
