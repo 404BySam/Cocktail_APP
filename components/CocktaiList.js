@@ -39,7 +39,6 @@ export default function CocktaiList({ navigation }) {
   return (
     <ImageBackground source={require("../assets/cocktails.png")}>
       {loading ? (
-        // Affiché quand loading == true
         <View style={styles.loaderContainer}>
           <ActivityIndicator size="large" color="#43a047" />
           <Text style={{ color: "white", marginTop: 10 }}>Chargement...</Text>
