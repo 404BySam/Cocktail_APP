@@ -13,28 +13,38 @@ import React, { useEffect, useState } from "react";
 export default function CocktaiList({ navigation }) {
   const [cocktails, setCocktails] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchCocktails = async () => {
+    let isMounted = true;
+    const fetchData = async () => {
       setLoading(true);
-      const results = [];
-      for (let i = 0; i < 10; i++) {
-        const res = await fetch(
-          "https://www.thecocktaildb.com/api/json/v1/1/random.php"
+      setError(null);
+      try {
+        const response = await fetch(
+          "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a"
         );
-        const data = await res.json();
-        if (data.drinks && data.drinks[0]) {
-          results.push(data.drinks[0]);
-        }
+        if (!response.ok) throw new Error("Erreur réseau !");
+        const json = await response.json();
+        if (isMounted) setCocktails(json.drinks || []);
+      } catch (err) {
+        if (isMounted) setError(err.message || "Erreur inconnue");
+      } finally {
+        if (isMounted) setLoading(false);
       }
-      setCocktails(results);
-      setLoading(false);
     };
 
-    fetchCocktails();
+    fetchData();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  if (!cocktails) return <ActivityIndicator />;
+  if (loading) return <ActivityIndicator size="large" color="#43a047" />;
+  if (error) return <Text style={{ color: "red" }}>Erreur : {error}</Text>;
+  if (!cocktails.length)
+    return <Text style={{ color: "white" }}>Aucun cocktail trouvé.</Text>;
 
   return (
     <ImageBackground source={require("../assets/cocktails.png")}>

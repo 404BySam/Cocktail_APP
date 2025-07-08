@@ -22,7 +22,7 @@ export default function RootStack() {
       <Stack.Screen
         name="Detail"
         component={DetailCocktail}
-        options={{ headerShown: false }}
+        options={{ headerShown: true }}
       />
     </Stack.Navigator>
   );
